@@ -135,7 +135,7 @@ function register() {
     }).then(data => {
       if (data['status'] == 201) {
         set_cookie(data);
-        navigate_to("index.html");
+        navigate_to("home.html");
       }
       else {
         display_errors(data);
