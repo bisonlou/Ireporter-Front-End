@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="Hold your leaders accountable.">
+  <meta name="author" content="Innocent Lou">
+
+  <title>iReporter | Hold your leaders accountable.</title>
+  <meta name="viewport" content="width=device-width">
+  <!--  CSS -->
+  <link href="./css/style.css" rel="stylesheet">
+  <script src="./js/scripts.js" type="text/javascript"></script>
+  <link rel="icon" href="./images/megaphone.png" sizes="32x32" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet">
+
+</head>
+
+<body id="login-bg">
+  <div class="nav-bar">
+    <header>
+      <div id="branding">
+        <h1><span class="highlight">i</span>&nbsp;Reporter</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="login.html">Sign In</a></li>
+        </ul>
+      </nav>
+  </div>
+  </header>
+  </div>
+  <div class="container">
+    <div class="register-box">
+      <div class="left-panel">
+        <p>Sign Up</p>
+      </div>
+      <div class="right-panel">
+        <div class="error-box" id="error-box">
+        </div>
+
+        <label class="error-label" id="username-error"></label>
+        <input type="text" placeholder="Username" id="username" required>
+
+        <label class="error-label" id="email-error"></label>
+        <input type="email" placeholder="Email" id="email" required>
+
+        <label class="error-label" id="firstname-error"></label>
+        <input type="text" placeholder="First Name" id="firstname" required>
+
+        <label class="error-label" id="lastname-error"></label>
+        <input type="text" placeholder="Last Name" id="lastname" required>
+
+        <input type="text" placeholder="Other Names" id="othernames">
+
+        <label class="error-label" id="phonenumber-error"></label>
+        <input type="tel" placeholder="Phone Number" id="phonenumber" required>
+
+        <label class="error-label" id="password-error"></label>
+        <input type="password" placeholder="Password" id="password" required>
+
+        <label class="error-label" id="confirm_password-error"></label>
+        <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+
+
+        <div class="btn-group-register">
+          <div class="btn-1">
+            <input type="submit" id="btn-cancel" onclick="navigate_to('index.html');" value="Back">
+          </div>
+          <div class="btn-2">
+            <input type="submit" id="btn-signup" onclick="register()" value="Sign Up">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1059 @@
+/* global */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width:90%;
+    margin:auto;
+    overflow: hidden;
+}
+
+#map {
+    height: 200px;  
+    width: 100%; 
+   }
+
+
+header{
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 10px;
+    min-height: 50px;
+    box-shadow: 3px 3px 10px #5b7f8d;
+    
+}
+
+header a{
+    text-decoration: none;
+    font-size: 14px;
+}
+
+header ul{
+    margin-top:10px;
+    padding: 0;
+}
+
+header ul li{
+    display: inline;
+}
+
+header ul li a{    
+    color: #5b7f8d;
+    padding: 5px 25px;
+    font-size: 16px;
+    border: 1px solid teal;
+    border-radius: 25px;
+}
+
+header ul li a:hover{
+    background-color: teal;
+}
+
+#branding{
+    font-family: 'Open Sans', sans-serif;
+    margin-left: 40px;
+    float: left;
+}
+
+header #branding h1{
+    margin:0;    
+
+}
+
+header nav{
+    float:right;
+    margin-right: 40px;
+}
+
+.landing{
+    margin:auto;
+    height: 350px;
+    width:100%;
+    padding-top:40px;
+    overflow: hidden;
+}
+
+
+.landing .left{
+    float: left;
+    width:33.3%;
+}
+
+.landing .middle{
+    float: left;
+    width:33.3%;
+}
+
+.landing .right{
+    float: right;
+    width:33.3%;
+}
+
+.landing-image{
+    border-radius:50% 50% 50% 50%;
+    width: 250px;
+    height: 250px; 
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+
+#protest {
+    background-image: url("../images/Protest.jpg");    
+}
+
+#loud {
+    background-image: url("../images/clem-onojeghuo-381204-unsplash.jpg");    
+}
+
+#evidence {
+    background-image: url("../images/Picture.jpg");    
+}
+
+.image-caption{
+    width: 70%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+a:hover {
+    color:#fff;
+}
+
+.highlight{
+    font-family: 'Pacifico', cursive;
+    font-style: italic;
+    color: teal;
+}
+
+.signup-pitch{
+    font-family: 'Raleway', sans-serif;
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.signup{
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    padding: 30px;
+}
+
+#btn-signup {
+    color: teal;
+    padding: 10px 40px;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid teal;
+    border-radius: 25px;
+}
+
+.login-box #btn-signup {
+    padding: 0px;
+}
+
+
+#btn-cancel{
+    color: crimson;
+    padding: 10px 40px;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid crimson;
+    border-radius: 25px;
+}
+
+#btn-signup:hover{
+    background-color: teal;
+    color: white;
+}
+
+#btn-cancel:hover{
+    background-color: crimson;
+    color: white;
+}
+
+button:hover, input[type=submit]:hover{
+    cursor: pointer;
+}
+
+.tables tbody tr:hover {
+    background-color: #5b7f8d;
+    color:#ffffff;
+}
+
+table{
+    width:97%;
+    border: none;
+    border-spacing: 0px;
+}
+
+table th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+ table td {
+    height: 30px;
+    vertical-align:middle;
+    border-bottom: 1px solid #ddd;
+  }
+
+  input {
+    padding: 5px;
+    margin: 5px 0 5px 0;
+  }
+  
+  hr {
+    border: 1px solid rgb(12, 148, 148);
+    
+  }
+
+  hr.gradient {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(50, 67, 228, 0), teal, rgba(0, 0, 0, 0));
+}
+
+  /* custom */
+
+  .error-label {
+      font-style: italic;
+      color: crimson;
+  }
+
+  .alert-box {
+      background-color: teal;
+      display: none;
+      width: 80%;
+      height: 40px;
+      margin:auto;
+  }
+
+  .error-box {
+    background-color: crimson;
+    display: none;    
+    width: 80%;
+    margin:auto;
+  }
+
+  .alert-box p, .error-box p{
+      color:#fff;
+      text-align: center;
+      padding-top: 8px;
+      line-height: 1.8em;
+  }
+
+
+.tables td a{
+    color: lightseagreen;
+}
+
+.table-header{
+    display:block;
+    width:95%;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 5px;
+    color: #ffffff;
+    box-shadow: 5px 5px 5px #5b7f8d;
+}
+
+.table-header.red{
+    background-color:rgb(216, 89, 115);
+}
+
+.table-header.intervention{
+    background-color: #5b7f8d;
+}
+
+
+/* login  */
+
+.black-box {
+    margin:auto;
+    margin-top: 100px;
+    padding:40px 20px;    
+    background:#000;    
+    opacity: 0.9;
+    width:80%;
+    height:320px;    
+    color:burlywood; 
+}
+
+.welcome-box {
+    float:left;        
+    text-align: center; 
+    padding-left: 20px;  
+    height:320px;
+    width:50%;
+}
+
+.welcome-box p {
+    font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    margin:0px;
+    padding: 0px;   
+    line-height: 2.0em;
+    font-size:16px;
+    font-weight: 100;    
+}
+
+.welcome-box input[type=submit] {
+    border-radius: 4px;
+    width : 40%;
+    outline:none;
+    margin-top:40px;
+    padding: 15px;
+    font-size: 16px;
+    color: white;
+    background: crimson;
+    border: none;
+}
+
+
+.login-box {
+    padding-top:30px;
+    margin: auto;
+    width:30%;
+    display: block;
+    overflow: hidden;
+}
+
+
+.black-box h1 {
+    margin:0;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-box p {
+    text-align: center;
+    margin:0px;
+    padding: 0px;   
+    font-size:18px;      
+    margin-bottom: 30px; 
+}
+
+.login-box .heading {
+    text-align: center;
+    margin:0px;
+    padding: 0px;   
+    font-size:30px; 
+    margin-bottom: 20px;
+}
+
+.login-box a {
+    text-align: center;
+    margin:0px;
+    padding: 0px;   
+    font-size:18px;   
+    color: teal; 
+}
+
+.login-box input {
+    width:100%; 
+    margin-bottom: 5px;
+    outline:none;
+    border:none;    
+    height: 40px;
+    font-size: 16px;
+    color: darkslategray;
+    border-bottom: 1px solid grey;
+    background: transparent;
+}
+
+.login-box .submit{
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+
+ .login-box input[type=submit]{    
+    width: 50%;
+}
+
+/* register */
+
+.container .register{
+    margin:auto;
+    width: 100%;    
+}
+
+.register-box .left-panel{
+    float: left;
+    width: 30%;
+    padding-top: 30px;
+}
+
+.register-box p{
+    margin:0;
+    padding: 0;    
+    font-size: 24px;
+    font-weight: 100;
+}
+
+.register-box .right-panel {
+    float: left;
+    margin: auto;
+    margin-top: 30px;
+    width:30%; 
+}
+.register-box h1 {
+    margin:0px;
+    padding: 0px;
+    color: burlywood;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+.register-box input {
+    width:100%; 
+    outline:none;
+    margin-bottom: 10px;
+    border:none;
+    font-size: 16px;
+    border-bottom: 1px solid lightslategray;
+    background: transparent;
+}
+
+.register-box input[type=submit] {
+    color: white;
+    height: 40px;
+}
+
+.btn-group-delete{
+    margin:auto;
+    width: 100%;
+}
+
+.btn-group-delete .btn-1{
+    float: left;
+    width: 40%;  
+    padding: 5px;  
+}
+
+.btn-group-delete .btn-2{
+    float: right;
+    width: 40%;  
+    padding: 5px;    
+}
+
+.btn-group-register{
+    margin:auto;
+    width: 100%;
+}
+
+.btn-group-register .btn-1{
+    float: left;
+    width: 40%;  
+    padding: 5px;  
+}
+
+.btn-group-register .btn-2{
+    float: right;
+    width: 40%;  
+    padding: 5px;    
+}
+
+
+
+/* home.html */
+.bg-image{
+    background: url("../images/alex-reid-246078-unsplash.jpg") ;
+    background-size: cover;
+    background-position: center;
+}
+
+.cards {
+    box-sizing: border-box;      
+    margin-top:5px; 
+    padding: 20px;   
+    min-height: 220px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card{
+    width:40%;
+    height: 200px;
+    color:#ffffff;
+    border-radius: 4px;
+}
+
+.card.redflag-card {
+    float: left;
+    background-color:rgb(228, 58, 58); 
+}
+
+.card.intervention-card{
+  float: right;
+  background-color:lightseagreen;
+  
+}
+
+.cards table {
+    padding-top:10px;
+    width:50%;
+    margin:auto;       
+}
+
+.cards table tr {
+border:none;
+border-spacing: 0px;
+}
+
+.card-label {
+    font-size: 14px;      
+}
+
+.card-value {
+  font-size: 30px;   
+  font-style: italic;    
+}
+
+.tables {
+    background-color: rgb(250, 246, 246); 
+    padding: 20px 0px;   
+    min-height: 220px;
+    width: 100%;
+  }
+
+.redflag-table {
+    float: left;
+    width:45%;
+    min-height: 200px;
+  }
+
+.intervention-table {
+    float: right;
+    width:45%;
+    min-height: 200px;
+  }
+
+.button-add{
+    float: right;
+    height: 37px; 
+    width: 37px;   
+    margin-right:8px;        
+    background: url('../images/plus.png');
+    border:none;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px #5b7f8d;
+}
+
+/* Red flag */
+
+
+.flag-box {
+    margin:auto;
+    height: 450px;
+    width:100%;
+    padding-top:40px;
+    overflow: auto;
+}
+
+.flag-box .left{
+    float: left;
+    width:50%;
+    height:400px;
+    padding:10px;
+    background: #ffffff;
+    box-shadow: 3px 3px 10px #5b7f8d;
+}
+
+
+.flag-box .right{
+    float:right;
+    width:40%;
+    height:400px;
+    padding:10px;
+    margin-right: 20px;
+    background: #ffffff;
+    box-shadow: 3px 3px 10px #5b7f8d;
+}
+
+
+.flag-box textarea {
+    margin-bottom: 10px;
+    outline: none;
+    width: 100px;
+    height: 100px;
+    font-size: 12px;
+    width:90%;
+    border:none;
+    border-bottom: 1px solid #5b7f8d;
+}
+
+.flag-box-submit{
+    margin:auto;
+    text-align: center;
+    padding: 10px;
+}
+.flag-box-submit input{
+    width:150px;
+    height:35px;
+    border: none;
+    outline:none;
+    color:#fff;
+    background: rgb(22, 119, 103);
+    font-size: 14px;
+    border-radius: 20px;
+}
+
+.flag-box input[type=submit]:hover{
+    cursor: pointer;
+}
+ .flag-box input{
+    margin: 10px;
+    width: 90%;
+    border:none;
+    font-size: 12px;
+    border-bottom: 1px solid #5b7f8d;
+    }
+
+.image-box{
+        background: #000000;
+        border-radius: 4px;
+        width:100%;
+        height:75%;
+        margin:auto;
+        text-align: center;
+        line-height: 200px;
+    }
+
+.flag-box .media-table{
+    height: 30%;
+}
+    
+.flag-box .image-box p {
+        color:#ffffff;
+        font-size: 20px;
+        font-weight: 100;
+    }
+    
+        /* login page */
+           
+        
+    .flag-box p{
+        margin:0;
+        padding: 0;    
+        font-size: 14px;
+        font-weight: 100;
+    }
+
+    .delete-box {
+        width:40%;
+        margin: auto;
+        margin-top: 100px;
+    }
+
+    .delete-box p{
+        font-size: 16px;
+        color: crimson;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .filter{
+        padding: 10px;
+        margin:auto;
+        width: 50%;
+        height: 30px;        
+    }
+
+    .filter .user input{
+        width: 40%;
+        float: left;
+    }
+
+    .filter .district input{
+        width:40%;
+        float: right;
+    }
+ 
+@media (max-width: 1024px){
+        .flag-box {
+            margin:auto;
+            width:80%;
+            padding-top: 10px;
+        }
+
+        .login-box #btn-signup {
+            padding: 0px;
+        }
+
+        .register-box #btn-signup {
+            padding: 0px;
+        }
+    
+        .flag-box .left, .flag-box .middle, .flag-box .right{
+            float:none;
+            width: 80%;
+            margin-bottom: 10px;
+            margin-right: 0px;
+            margin-left: 10px;
+            
+        }
+    }
+
+    
+@media screen and (max-width: 768px){
+    .tables{
+        padding:5px;       
+    }
+
+    .tables .table1 table tbody tr {
+        height:40px;
+        font-size: 12px;
+    }
+    
+    .tables .table2 table tbody tr {
+        height:40px;
+        font-size: 12px;
+    }
+
+    .card1 {
+        width:48%;
+    }
+
+    .card2 {
+        width:48%;
+    }
+
+    #total-flags {
+        width:80%;
+    }
+
+    #total-flags {
+        width:80%;
+    }
+
+    .container{
+        width: 95%;
+    }
+
+    .flag-box {
+        margin:auto;
+        width:90%;
+        padding-top: 10px;
+    }
+
+    .flag-box .left, .flag-box .middle, .flag-box .right{
+        float:none;
+        margin-bottom: 10px;
+        margin-right: 0px;
+        margin-left: 10px;
+        
+    }
+
+    .redflag-table-wide {
+        float: none;
+        width: 95%;
+    }
+
+    .intervention-table-wide{
+        float: none;
+        width: 95%;
+    }
+
+    .welcome-box input[type=submit] {
+        margin-top: 20px;        
+    }
+
+    .welcome-box p {
+        font-size: 15px;       
+    }
+  
+  
+}
+
+@media screen and (max-width: 550px){
+    .tables{
+        padding:0px;       
+    }
+
+    .tables .table1 table tbody tr {
+        height:50px;
+        font-size: 12px;
+    }
+    
+    .tables .table2 table tbody tr {
+        height:50px;
+        font-size: 12px;
+    }
+
+   
+    .cards {
+        padding:0px;
+    }
+
+    .card1 {
+        width:48%;
+    }
+
+    .card2 {
+        width:48%;
+    }
+
+    #total-flags {
+        width:80%;
+    }
+
+    #total-flags {
+        width:80%;
+    }
+
+    .container{
+        width: 95%;
+    }
+
+    .register-box {
+        margin: auto;
+        width:60%;
+    }
+
+    .welcome-box {
+        padding-left: 0px;  
+    }
+
+    .login-box {
+        width:40%;          
+    }
+
+    .filter{
+        width: 80%;
+    }
+
+    .filter .user input{
+        width: 50%;
+        float: left;
+    }
+
+    .filter .district input{
+        width:50%;
+        float: right;
+    }
+}
+
+@media screen and (max-width: 470px){
+    .tables{
+        padding:10px;    
+        float:none;   
+    }
+
+    .tables .table1 table tbody tr {
+        height:30px;
+        font-size: 12px;
+    }
+    
+    .tables .table2 table tbody tr {
+        height:30px;
+        font-size: 12px;
+    }
+
+    .tables .table1 table thead tr {
+        height:30px;
+        font-size: 12px;
+    }
+    
+    .tables .table2 table thead tr {
+        height:30px;
+        font-size: 12px;
+    }
+
+    .table1 {
+        float:none;
+        width:90%;
+    }
+
+    .table2 {
+        float:none;
+        width:90%;
+    }
+
+    .redflag-table {
+        float: none;
+        width: 100%;
+    }
+
+    .intervention-table {
+        float: none;
+        width: 100%;
+    }
+
+    .card{
+        width:48%;
+    }
+
+    .cards {
+        padding:0px;
+    }
+
+    .cards table {
+        padding-top: 5px;
+        width: 80%;
+    }
+
+    .card1 {
+        width:48%;
+    }
+
+    .card2 {
+        width:48%;
+    }
+
+    #total-flags {
+        width:80%;
+    }
+
+    #total-flags {
+        width:80%;
+    }
+
+    .container{
+        width: 95%;
+    }
+
+    .filter {
+        padding: 0px;
+        width: 100%;
+        padding: 0px;
+        height: 30px;
+    }
+
+    .register-box {
+        margin: auto;
+        width:95%;        
+    }
+   
+    .login-box {
+        height: 400px;
+        width: 70%;
+    }
+    .login-box input{     
+        margin-bottom: 10px;  
+    }
+    
+
+    #branding {
+        margin-left: 10px;
+    }
+    
+    header nav {
+        margin-right: 10px;
+    }
+
+    .landing {
+        padding-top: 10px;
+        height: 280px
+    }
+
+    .landing-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .image-caption {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    .signup-pitch {
+        width: 95%;
+        font-size: 16px;
+        padding-top: 10px;
+    }
+
+    .register-box p {
+        font-size: 18px;
+    }
+
+    .register-box .right-panel {
+        width: 80%;
+    }
+
+    .register-box .left-panel {
+        float: none; 
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    .register-box .right-panel {
+        float: none; 
+        margin: auto;
+        margin-top: 10px;
+    }    
+
+    header ul li a {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .table-header {
+        width: 93%;
+    }
+
+    .delete-box {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .btn-group-register #btn-signup {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btn-group-register #btn-cancel {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btn-group-register .btn-1 {
+        width: 48%;
+        padding: 0px;
+    }
+
+    .btn-group-register .btn-2 {
+        width: 48%;
+        padding: 0px;
+    }
+
+    .btn-group-delete {
+        width: 80%;
+    }
+
+    .btn-group-delete #btn-signup {
+        padding: 10px 40px;
+        font-size: 14px;
+    }
+
+    .btn-group-delete #btn-cancel {
+        padding: 10px 30px;
+        font-size: 14px;
+    }
+
+}
