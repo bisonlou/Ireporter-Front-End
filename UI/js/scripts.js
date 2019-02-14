@@ -311,6 +311,7 @@ function upload_images(incident_id) {
 
       fetch(url, {
         method: 'patch',
+        mode: "no-cors",
         body: form_data,
         headers: {
           'Authorization': document.cookie
