@@ -1,0 +1,195 @@
+@import url(https://fonts.googleapis.com/css?family=Abel);
+/* ------- DO NOT EDIT BELOW --------- */
+.chart-one {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  position: relative;
+}
+.chart-one.animate svg .circle-foreground {
+  animation: offset 3s ease-in-out forwards;
+  animation-delay: 1s;
+}
+.chart-one.animate figcaption:after {
+  animation: chart-one-label 3s steps(32) forwards;
+  animation-delay: 1s;
+}
+.chart-one svg {
+  width: 100%;
+  height: 100%;
+}
+.chart-one svg .circle-background, .chart-one svg .circle-foreground, .chart-one svg .chart-two svg .circle-foreground, .chart-two svg .chart-one svg .circle-foreground, .chart-one svg .chart-three svg .circle-foreground, .chart-three svg .chart-one svg .circle-foreground {
+  r: 99.5px;
+  cx: 50%;
+  cy: 50%;
+  fill: none;
+  stroke: #305556;
+  stroke-width: 1px;
+}
+.chart-one svg .circle-foreground {
+  stroke: #79be9b;
+  stroke-dasharray: 199.9552px 624.86px;
+  stroke-dashoffset: 199.9552px;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+.chart-one figcaption {
+  display: inline-block;
+  width: 100%;
+  height: 2.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: #c6e8d7;
+  position: absolute;
+  top: calc(50% - 1.25rem);
+  left: 0;
+  font-size: 0;
+}
+.chart-one figcaption:after {
+  display: inline-block;
+  content: '0%\a1%\a2%\a3%\a4%\a5%\a6%\a7%\a8%\a9%\a10%\a11%\a12%\a13%\a14%\a15%\a16%\a17%\a18%\a19%\a20%\a21%\a22%\a23%\a24%\a25%\a26%\a27%\a28%\a29%\a30%\a31%\a32%\a33%\a34%\a35%\a36%\a37%\a38%\a39%\a40%\a41%\a42%\a43%\a44%\a45%\a46%\a47%\a48%\a49%\a50%\a51%\a52%\a53%\a54%\a55%\a56%\a57%\a58%\a59%\a60%\a61%\a62%\a63%\a64%\a65%\a66%\a67%\a68%\a69%\a70%\a71%\a72%\a73%\a74%\a75%\a76%\a77%\a78%\a79%\a80%\a81%\a82%\a83%\a84%\a85%\a86%\a87%\a88%\a89%\a90%\a91%\a92%\a93%\a94%\a95%\a96%\a97%\a98%\a99%\a100%\a';
+  white-space: pre;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+}
+@keyframes chart-one-label {
+  100% {
+    transform: translateY(-80rem);
+  }
+}
+.chart-two {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  position: relative;
+}
+.chart-two.animate svg .circle-foreground {
+  animation: offset 3s ease-in-out forwards;
+  animation-delay: 1s;
+}
+.chart-two.animate figcaption:after {
+  animation: chart-two-label 3s steps(50) forwards;
+  animation-delay: 1s;
+}
+.chart-two svg {
+  width: 100%;
+  height: 100%;
+}
+.chart-two svg .circle-background, .chart-two svg .chart-one svg .circle-foreground, .chart-one svg .chart-two svg .circle-foreground, .chart-two svg .circle-foreground, .chart-two svg .chart-three svg .circle-foreground, .chart-three svg .chart-two svg .circle-foreground {
+  r: 92.5px;
+  cx: 50%;
+  cy: 50%;
+  fill: none;
+  stroke: #305556;
+  stroke-width: 15px;
+}
+.chart-two svg .circle-foreground {
+  stroke: #d0f09e;
+  stroke-dasharray: 290.45px 580.9px;
+  stroke-dashoffset: 290.45px;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+.chart-two figcaption {
+  display: inline-block;
+  width: 100%;
+  height: 2.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: #c6e8d7;
+  position: absolute;
+  top: calc(50% - 1.25rem);
+  left: 0;
+  font-size: 0;
+}
+.chart-two figcaption:after {
+  display: inline-block;
+  content: '0%\a1%\a2%\a3%\a4%\a5%\a6%\a7%\a8%\a9%\a10%\a11%\a12%\a13%\a14%\a15%\a16%\a17%\a18%\a19%\a20%\a21%\a22%\a23%\a24%\a25%\a26%\a27%\a28%\a29%\a30%\a31%\a32%\a33%\a34%\a35%\a36%\a37%\a38%\a39%\a40%\a41%\a42%\a43%\a44%\a45%\a46%\a47%\a48%\a49%\a50%\a51%\a52%\a53%\a54%\a55%\a56%\a57%\a58%\a59%\a60%\a61%\a62%\a63%\a64%\a65%\a66%\a67%\a68%\a69%\a70%\a71%\a72%\a73%\a74%\a75%\a76%\a77%\a78%\a79%\a80%\a81%\a82%\a83%\a84%\a85%\a86%\a87%\a88%\a89%\a90%\a91%\a92%\a93%\a94%\a95%\a96%\a97%\a98%\a99%\a100%\a';
+  white-space: pre;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+}
+@keyframes chart-two-label {
+  100% {
+    transform: translateY(-125rem);
+  }
+}
+.chart-three {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  position: relative;
+}
+.chart-three.animate svg .circle-foreground {
+  animation: offset 3s ease-in-out forwards;
+  animation-delay: 1s;
+}
+.chart-three.animate figcaption:after {
+  animation: chart-three-label 3s steps(75) forwards;
+  animation-delay: 1s;
+}
+.chart-three svg {
+  width: 100%;
+  height: 100%;
+}
+.chart-three svg .circle-background, .chart-three svg .chart-one svg .circle-foreground, .chart-one svg .chart-three svg .circle-foreground, .chart-three svg .chart-two svg .circle-foreground, .chart-two svg .chart-three svg .circle-foreground, .chart-three svg .circle-foreground {
+  r: 87.5px;
+  cx: 50%;
+  cy: 50%;
+  fill: none;
+  stroke: #305556;
+  stroke-width: 25px;
+}
+.chart-three svg .circle-foreground {
+  stroke: #389967;
+  stroke-dasharray: 412.125px 549.5px;
+  stroke-dashoffset: 412.125px;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+.chart-three figcaption {
+  display: inline-block;
+  width: 100%;
+  height: 2.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: #c6e8d7;
+  position: absolute;
+  top: calc(50% - 1.25rem);
+  left: 0;
+  font-size: 0;
+}
+.chart-three figcaption:after {
+  display: inline-block;
+  content: '0%\a1%\a2%\a3%\a4%\a5%\a6%\a7%\a8%\a9%\a10%\a11%\a12%\a13%\a14%\a15%\a16%\a17%\a18%\a19%\a20%\a21%\a22%\a23%\a24%\a25%\a26%\a27%\a28%\a29%\a30%\a31%\a32%\a33%\a34%\a35%\a36%\a37%\a38%\a39%\a40%\a41%\a42%\a43%\a44%\a45%\a46%\a47%\a48%\a49%\a50%\a51%\a52%\a53%\a54%\a55%\a56%\a57%\a58%\a59%\a60%\a61%\a62%\a63%\a64%\a65%\a66%\a67%\a68%\a69%\a70%\a71%\a72%\a73%\a74%\a75%\a76%\a77%\a78%\a79%\a80%\a81%\a82%\a83%\a84%\a85%\a86%\a87%\a88%\a89%\a90%\a91%\a92%\a93%\a94%\a95%\a96%\a97%\a98%\a99%\a100%\a';
+  white-space: pre;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+}
+@keyframes chart-three-label {
+  100% {
+    transform: translateY(-187.5rem);
+  }
+}
+@keyframes offset {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+/* codepen styling only */
+body {
+  background: #272b31;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+figure {
+  margin: 1rem !important;
+}
+figcaption {
+  font-family: 'Abel', sans-serif;
+}
