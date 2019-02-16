@@ -44,21 +44,21 @@
                 <p>Image evidence</p>
                 <input type="file" id="image" multiple onchange="displayImages(this.files); return false;" />
                 <div class="media-table">
-                    <table id="images_table">
+                    <table id="images-table">
                     </table>
                 </div>
 
                 <p>Video evidence</p>
                 <input type="file" disabled>
                 <div class="media-table">
-                    <table id="images_table">
+                    <table id="videos-table">
 
                     </table>
                 </div>
             </div>
         </div>
         <div class="flag-box-submit">
-            <input type="submit" onclick="postIncident('intervention');" value="Submit">
+            <input type="submit" onclick="postIncident('intervention'); return false;" value="Submit">
         </div>
 </body>
 <!--  JAVASCRIPT -->

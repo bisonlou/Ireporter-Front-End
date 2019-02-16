@@ -102,7 +102,7 @@ map.on('load', function () {
 });
 
 function register() {
-  const url = 'https://knightedge.herokuapp.com/api/v1/auth/signup';
+  const url = 'https://bisonlou.herokuapp.com/api/v1/auth/signup';
   // const url = 'http://127.0.0.1:5000/api/v1/auth/signup';
   required_fields = ['username', 'email', 'firstname', 'lastname', 'phonenumber', 'password'];
 
@@ -153,7 +153,9 @@ function login() {
   if (validate_required(required_fields) > 0) {
     return
   }
-  const url = 'https://knightedge.herokuapp.com/api/v1/auth/login';
+  loader = get_element('loader');
+  loader.style.display = 'block';
+  const url = 'https://bisonlou.herokuapp.com/api/v1/auth/login';
   // const url = 'http://127.0.0.1:5000/api/v1/auth/login';
 
   body = JSON.stringify({
@@ -171,18 +173,20 @@ function login() {
     }).then(data => {
       if (data['status'] == 200) {
         set_cookie(data);
-        if (data['data'][0]['user']['isadmin'] == true){
+        if (data['data'][0]['user']['isadmin'] == true) {
           navigate_to("admin_dashboard.html");
-        }else {
+        } else {
           navigate_to("home.html");
         }
-        
+        loader.style.display = 'block';
       }
       else {
         display_errors(data);
+        loader.style.display = 'none';
       }
 
     }).catch(err => {
+      loader.style.display = 'none';
       console.log(err);
 
     });
@@ -197,10 +201,9 @@ function getIndexData() {
 
 
 function displayUserName() {
-
-  const url = 'https://knightedge.herokuapp.com/api/v1/auth/user';
+  const url = 'https://bisonlou.herokuapp.com/api/v1/auth/user';
   // const url = 'http://127.0.0.1:5000/api/v1/auth/users';
-
+  
   fetch(url, {
     headers: get_headers()
   })
@@ -210,14 +213,20 @@ function displayUserName() {
     }).then(data => {
       account_name = get_element('account-name');
       account_name.innerHTML = data['data'][0]['username'];
-
     }).catch(err => {
       console.log(err);
     });
+    
+}
+
+function getIncidents() {
+  getRedflags('admin')
+  getInterventions('admin')
 }
 
 function getRedflags(user_type) {
-  const url = 'https://knightedge.herokuapp.com/api/v1/redflags';
+  loader.style.display = 'block';
+  const url = 'https://bisonlou.herokuapp.com/api/v1/redflags';
   // const url = 'http://127.0.0.1:5000/api/v1/redflags';
 
   fetch(url, {
@@ -229,18 +238,22 @@ function getRedflags(user_type) {
     }).then(data => {
 
       if (data['status'] == 401) {
+        loader.style.display = 'none';
         navigate_to('login.html');
       }
 
       const table = get_element('redflag-table');
       populate_incident_table(data, table, 'red-flag', user_type)
+      loader.style.display = 'none';
     }).catch(err => {
+      loader.style.display = 'none';
       console.log(err);
     });
 }
 
 function getInterventions(user_type) {
-  const url = 'https://knightedge.herokuapp.com/api/v1/interventions';
+  loader.style.display = 'block';
+  const url = 'https://bisonlou.herokuapp.com/api/v1/interventions';
   // const url = 'http://127.0.0.1:5000/api/v1/interventions';
 
   fetch(url, {
@@ -252,19 +265,23 @@ function getInterventions(user_type) {
     }).then(data => {
 
       if (data['status'] == 401) {
+        loader.style.display = 'none';
         navigate_to('login.html');
       }
 
       const table = document.getElementById('intervention-table');
-      populate_incident_table(data, table, 'intervention', user_type);  
+      populate_incident_table(data, table, 'intervention', user_type);
+      loader.style.display = 'none';
     }).catch(err => {
+      loader.style.display = 'none';
       console.log(err);
     });
 }
 
-function getDashboardTotals(){
-  const url = 'https://knightedge.herokuapp.com/api/v1/incidents/totals';
-  // const url = 'http://127.0.0.1:5000/api/v1/interventions';
+function getDashboardTotals() {
+  loader.style.display = 'block';
+  const url = 'https://bisonlou.herokuapp.com/api/v1/incidents/totals';
+  // const url = 'http://127.0.0.1:5000/api/v1/incidents/totals';
 
   fetch(url, {
     headers: get_headers()
@@ -276,17 +293,21 @@ function getDashboardTotals(){
 
       if (data['status'] == 401) {
         navigate_to('login.html');
-      }else{
-        update_dashboard(data)
-      } 
+      } else {
+        update_dashboard(data)        
+      }
+      loader.style.display = 'none';
     }).catch(err => {
+      loader.style.display = 'none';
       console.log(err);
     });
+    
 }
 
 
 function getUsers() {
-  const url = 'https://knightedge.herokuapp.com/api/v1/auth/users';
+  loader.style.display = 'block';
+  const url = 'https://bisonlou.herokuapp.com/api/v1/auth/users';
   // const url = 'http://127.0.0.1:5000/api/v1/auth/users';
 
   fetch(url, {
@@ -297,28 +318,28 @@ function getUsers() {
       return response.json();
     }).then(data => {
       populate_users_table(data);
+      loader.style.display = 'none';
     }).catch(err => {
+      loader.style.display = 'none';
       console.log(err);
     });
 }
 
 
 function postIncident(incidentType) {
-  var incident_id
-  if (validateIncident() == false) {
-    return
-  }
+  if (validateIncident() == false) { return }
+  loader.style.display = 'block';
 
-  url = 'https://knightedge.herokuapp.com/api/v1/incidents';
+  url = 'https://bisonlou.herokuapp.com/api/v1/incidents';
   // url = 'http://127.0.0.1:5000/api/v1/incidents';
-  //  
-  let body = JSON.stringify({
+    
+  var body = JSON.stringify({
     'title': get_element_value('title'),
     'comment': get_element_value('comment'),
     'latitude': lat,
     'longitude': lng,
     'type': incidentType
-  })
+  });
 
   fetch(url, {
     method: 'post',
@@ -328,57 +349,44 @@ function postIncident(incidentType) {
     return response.json();
   }).then(data => {
     if (data['status'] == 201) {
-      incident_id = data['data'][0]['id'];
+      var incident_id = data['data'][0]['id'];
+
+      if (image_collection != null) {
+        for (i = 0; i < image_collection.length; i++) {
+          form_data = new FormData();
+          file = image_collection[0];
+
+          form_data.append("image", file, file.name);
+          url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
+          // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
+
+          return fetch(url, {
+            method: 'PATCH',
+            body: form_data,
+            headers: {
+              'Authorization': document.cookie
+            }
+          }).then(response => {            
+            loader.style.display = 'none';
+            navigate_to('home.html');
+          })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+      }
     }
-  }).then(response => {
-    upload_images(incident_id);
-    displayAlert();
+    loader.style.display = 'none';
+    navigate_to('home.html');
   })
-    .catch(err => {
-      console.log(err);
-    });
-
-
 }
-
-function upload_images(incident_id) {
-  if (image_collection != null) {
-    for (i = 0; i < image_collection.length; i++) {
-      form_data = new FormData();
-      file = image_collection[i];
-
-      form_data.append("image", file, file.name);
-      url = 'https://knightedge.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
-      // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
-
-      fetch(url, {
-        method: 'patch',
-        body: form_data,
-        headers: {
-          'Authorization': document.cookie
-        }
-      }).then(response => {
-        return response.json();
-      }).then(data => {
-        if (data['status'] == 200) {
-          displayAlert();
-        }
-        console.log(data)
-      })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  }
-}
-
 
 
 function displayImages(files) {
   let i = 0
   image_collection = files;
   numFiles = files.length;
-  var table = get_element('images_table')
+  var table = get_element('images-table')
 
   for (i; i < numFiles; i++) {
     const file = files[i];
@@ -397,20 +405,21 @@ function displayImages(files) {
 
 
 function putIncident() {
+  loader.style.display = 'block';
   let current_url = window.location.href;
-  let incidentType = /type=([^&]+)/.exec(current_url)[1];
-  let incidentId = /id=([^&]+)/.exec(current_url)[1];
-  incidentId = parseInt(incidentId, 10)
+  let incident_type = /type=([^&]+)/.exec(current_url)[1];
+  let incident_id = /id=([^&]+)/.exec(current_url)[1];
+  incident_id = parseInt(incident_id, 10);
 
-  url = 'https://knightedge.herokuapp.com/api/v1/incidents/' + incidentId;
-  // url ='http://127.0.0.1:5000/api/v1/incidents/' + incidentId;
+  url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id;
+  // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id;
 
   let body = JSON.stringify({
     'title': get_element_value('title'),
     'comment': get_element_value('comment'),
     'latitude': lat,
     'longitude': lng,
-    'type': incidentType,
+    'type': incident_type,
     'status': 'pending'
   })
 
@@ -423,17 +432,43 @@ function putIncident() {
     .then(response => {
       return response.json();
     }).then(data => {
-      if (data['status'] == 200) {
-        let incident_id = data['data'][0]['id'];
-        upload_images(incident_id);
-        displayAlert();
+      if (data['status'] == 401) {
+        navigate_to('login.html')
       }
-    }).catch(err => {
-      console.log(err);
-    });
+      if (data['status'] == 200) {
+        incident_id = data['data'][0]['id'];
+
+        if (image_collection != null) {
+          for (i = 0; i < image_collection.length; i++) {
+            form_data = new FormData();
+            file = image_collection[0];
+
+            form_data.append("image", file, file.name);
+            url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
+            // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
+
+            return fetch(url, {
+              method: 'PATCH',
+              body: form_data,
+              headers: {
+                'Authorization': document.cookie
+              }
+            }).then(response => {
+              loader.style.display = 'block';
+              navigate_to('home.html');
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+        }
+      }
+      loader.style.display = 'block';
+      navigate_to('home.html');
+    })
 }
 
 function getIncident() {
+  loader.style.display = 'block';
   let current_url = window.location.href;
   let incidentId = /id=([^&]+)/.exec(current_url)[1];
   incidentId = parseInt(incidentId, 10)
@@ -441,9 +476,9 @@ function getIncident() {
   let title = get_element('title');
   let comment = get_element('comment');
 
-  var url = 'https://knightedge.herokuapp.com/api/v1/incidents/' + incidentId;
-    //var url 'http://127.0.0.1:5000/api/v1/incident/' + incidentId;
-  
+  var url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incidentId;
+  // var url ='http://127.0.0.1:5000/api/v1/incident/' + incidentId;
+
 
   fetch(url, {
     method: 'get',
@@ -455,28 +490,33 @@ function getIncident() {
     }).then(data => {
       title.value = data['data'][0]['title'];
       comment.innerHTML = data['data'][0]['comment'];
+      lng = data['data'][0]['longitude'];
+      lat = data['data'][0]['latitude']
 
       table = get_element('images-table')
       populate_images_table(data, table)
 
+      geojson.features[0].geometry.coordinates = [lng, lat];
+      map.on('load', onMove);
+      map.flyTo({
+        center: [lng, lat],
+        zoom: 15
+      });
+      loader.style.display = 'none'
     }).catch(err => {
       console.log(err);
     });
 
 }
 
-function getIncidents() {
-  getRedflags('admin')
-  getInterventions('admin')
-}
 
 function deleteIncident() {
   let current_url = window.location.href;
   let incidentId = /id=([^&]+)/.exec(current_url)[1];
   // incidentId = parseInt(incidentId, 10)
+  loader.style.display = 'block';
 
-
-  url = 'https://knightedge.herokuapp.com/api/v1/incidents/' + incidentId;
+  url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incidentId;
   // url = url = 'http://127.0.0.1:5000/api/v1/incidents/' + incidentId;
 
   fetch(url, {
@@ -488,6 +528,7 @@ function deleteIncident() {
       return response.json();
     }).then(data => {
       if (data['status'] == 200) {
+        loader.style.display = 'none';
         navigate_to('home.html');
       }
     }).catch(err => {
@@ -564,7 +605,7 @@ function displayAlert() {
 
 
 function navigate_to(page) {
-  window.location.href = "https://bisonlou.github.io/Challenge-IV/UI/" + page ;
+  window.location.href = "https://bisonlou.github.io/Challenge-IV/UI/" + page;
   // window.location.href = "http://localhost/iReporter/" + page;
 }
 
@@ -583,6 +624,8 @@ function populate_images_table(data, table) {
 }
 
 function populate_incident_table(data, table, type, user_type) {
+  //type is required for specifying the type on incident updating
+
   for (i = 0; i < (data['data'][0]).length; i++) {
     var row = table.insertRow(i + 1);
 
@@ -591,7 +634,7 @@ function populate_incident_table(data, table, type, user_type) {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
 
-    incidentId = data['data'][0][i]['id'];
+    incident_id = data['data'][0][i]['id'];
     long_date_time = new Date(data['data'][0][i]['createdon']);
 
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -612,40 +655,40 @@ function populate_incident_table(data, table, type, user_type) {
     cell2.innerHTML = data['data'][0][i]['title'];
     cell3.innerHTML = data['data'][0][i]['status'];
 
-    if (user_type == 'admin'){
-      cell4.innerHTML = '<a href="./admin_view_incident.html?id=' + incidentId + '">View</a>';
-    }else{
-      cell4.innerHTML = '<a href="./incident_edit.html?id=' + incidentId +
-      '">Edit</a> | <a href="./incident_confirm_delete.html?id=' + incidentId +
-      '">Delete</a>';
-    }  
+    if (user_type == 'admin') {
+      cell4.innerHTML = '<a href="./admin_view_incident.html?id=' + incident_id + '">View</a>';
+    } else {
+      cell4.innerHTML = '<a href="./incident_edit.html?type=' + type + '&id=' + incident_id +
+        '">Edit</a> | <a href="./incident_confirm_delete.html?type=' + type + '&id=' + incident_id +
+        '">Delete</a>';
+    }
 
   }
 }
 
 
-  function populate_users_table(data) {
-    for (i = 0; i < (data['data'][0]).length; i++) {
-      var table = get_element('users_table')
-      var row = table.insertRow(i + 1);
-      var user_id = data['data'][0][i]['id']
-  
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);    
-      var cell6 = row.insertCell(5);    
-  
-      cell1.innerHTML = data['data'][0][i]['username'];
-      cell2.innerHTML = data['data'][0][i]['email'];
-      cell3.innerHTML = data['data'][0][i]['firstname'];
-      cell4.innerHTML = data['data'][0][i]['lastname'];
-      cell5.innerHTML = data['data'][0][i]['phonenumber'];
-      cell6.innerHTML = '<a href="./user_edit.html?id=' + user_id +
-       '">Edit</a> | <a href="./user_confirm_delete.html?id=' + user_id + '">Delete</a>';
-  
-    }
+function populate_users_table(data) {
+  for (i = 0; i < (data['data'][0]).length; i++) {
+    var table = get_element('users_table')
+    var row = table.insertRow(i + 1);
+    var user_id = data['data'][0][i]['id']
+
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+
+    cell1.innerHTML = data['data'][0][i]['username'];
+    cell2.innerHTML = data['data'][0][i]['email'];
+    cell3.innerHTML = data['data'][0][i]['firstname'];
+    cell4.innerHTML = data['data'][0][i]['lastname'];
+    cell5.innerHTML = data['data'][0][i]['phonenumber'];
+    cell6.innerHTML = '<a href="./user_edit.html?id=' + user_id +
+      '">Edit</a> | <a href="./user_confirm_delete.html?id=' + user_id + '">Delete</a>';
+
+  }
 }
 
 function update_dashboard(data) {
@@ -654,16 +697,17 @@ function update_dashboard(data) {
   get_element('total-redflags').innerHTML = node['total_red-flag']['count'];
   get_element('pending-redflags').innerHTML = node['pending_red-flag']['count'];
   get_element('rejected-redflags').innerHTML = node['rejected_red-flag']['count'];
-  get_element('resolved-redflags').innerHTML = node['resolved_red-flag']['count'];
-  get_element('investigation-redflags').innerHTML = node['investigation_red-flag']['count'];
 
   get_element('total-interventions').innerHTML = node['total_intervention']['count'];
   get_element('pending-interventions').innerHTML = node['pending_intervention']['count'];
   get_element('rejected-interventions').innerHTML = node['rejected_intervention']['count'];
-  get_element('resolved-interventions').innerHTML = node['resolved_intervention']['count'];
-  get_element('investigation-interventions').innerHTML = node['investigation_intervention']['count'];
 
-  if (get_element('total-users') != 'undefined'){
+
+  if (get_element('total-users') != 'undefined') {
+    get_element('resolved-redflags').innerHTML = node['resolved_red-flag']['count'];
+    get_element('investigation-redflags').innerHTML = node['investigation_red-flag']['count'];
+    get_element('resolved-interventions').innerHTML = node['resolved_intervention']['count'];
+    get_element('investigation-interventions').innerHTML = node['investigation_intervention']['count'];
     get_element('total-users').innerHTML = node['users_count']['count'];
     get_element('total-admins').innerHTML = node['admin_count']['count'];
     get_element('total-non-admins').innerHTML = node['non_admin_count']['count'];

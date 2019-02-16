@@ -1,5 +1,15 @@
 
-
+#loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.75) url(../images/loader.gif) no-repeat center center;
+    z-index: 10000;
+  }
 /* global */
 
 .sidenav {
@@ -141,7 +151,7 @@ header nav{
 }
 
 #loud {
-    background-image: url("../images/clem-onojeghuo-381204-unsplash.jpg");    
+    background-image: url("../images/loud.jpg");    
 }
 
 #evidence {
@@ -566,7 +576,7 @@ border-spacing: 0px;
 
 .tables {
     background-color: rgb(250, 246, 246); 
-    padding: 20px 0px;   
+    margin-top: 20px;  
     min-height: 220px;
     width: 100%;
   }
