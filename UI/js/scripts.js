@@ -102,6 +102,7 @@ map.on('load', function () {
 });
 
 function register() {
+  loader.style.display = 'block';
   const url = 'https://bisonlou.herokuapp.com/api/v1/auth/signup';
   // const url = 'http://127.0.0.1:5000/api/v1/auth/signup';
   required_fields = ['username', 'email', 'firstname', 'lastname', 'phonenumber', 'password'];
@@ -136,12 +137,15 @@ function register() {
     }).then(data => {
       if (data['status'] == 201) {
         set_cookie(data);
+        loader.style.display = 'none';
         navigate_to("home.html");
       }
       else {
         display_errors(data);
+        loader.style.display = 'none';
       }
     }).catch(err => {
+      loader.style.display = 'none';
       console.log(err);
     });
 }
@@ -149,7 +153,6 @@ function register() {
 function login() {
 
   required_fields = ['email', 'password'];
-
   if (validate_required(required_fields) > 0) {
     return
   }

@@ -293,6 +293,7 @@ table th {
     display: none;    
     width: 80%;
     margin:auto;
+    border-radius: 4px;
   }
 
   .alert-box p, .error-box p{
