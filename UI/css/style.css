@@ -20,8 +20,8 @@
     top: 0;
     left: 0;
     background-color: #111;
-    overflow-x: hidden;
-    padding-top: 60px;
+    overflow-x: hidden;        
+    margin-top: 60px;
   }
   
   .sidenav a {
@@ -50,18 +50,13 @@ body {
     background-color: #f4f4f4;
 }
 
+ul {
+    padding-inline-start: 0px;
+}
 .container {
     width:90%;
     margin:auto;
     overflow: hidden;
-}
-
-.container-wide{
-    width:100%;
-    margin:auto;
-    margin-top:5px;
-    overflow: hidden;
-    background-color: #e5f2f7;
 }
 
 
@@ -637,8 +632,10 @@ table th {
 .cards {
     box-sizing: border-box;      
     margin-top:5px; 
-    min-height: 230px;
+    min-height: 250px;
     width: 100%;
+    padding-left: 70px;
+    padding-right: 70px;
     overflow: hidden;
 }
 
@@ -1007,9 +1004,15 @@ border-spacing: 0px;
 
     .sidenav {
         padding-top: 15px;
+        width: auto;
     }
+
+    .main {
+        margin-left: 120px;
+    }
+
     .sidenav a {
-        font-size: 18px;
+        font-size: 18px; 
     }
 
     .tables{
@@ -1057,10 +1060,6 @@ border-spacing: 0px;
         width: 100%;
     }
 
-    .card{
-        width:48%;
-    }
-
     .cards {
         padding:0px;
     }
@@ -1088,14 +1087,9 @@ border-spacing: 0px;
 
     .container{
         width: 95%;
+        overflow: auto;
     }
 
-    .filter {
-        padding: 0px;
-        width: 100%;
-        padding: 0px;
-        height: 30px;
-    }
 
     .register-box {
         margin: auto;

@@ -1,15 +1,14 @@
-/* @import "compass/css3"; */
+.container-wide{
+  width:100%;
+  margin:auto;
+  margin-top:5px;
+  overflow: hidden;
+  background-color: #e5f2f7;
+}
 
 .chart {
   display: table;
-  table-layout: fixed;
   width: 100%;
-  max-width: 700px;
-  height: 200px;
-  margin: 0 auto;
-  background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.1) 2%, transparent 2%);
-  background-size: 100% 50px;
-  background-position: left top;
 }
 .chart li {
   position: relative;
@@ -46,4 +45,34 @@
   0% {
     height: 0;
   }
+}
+
+@media screen and (max-width: 470px){
+
+    .chart li {
+      height: 100px;
+  }
+
+  .container-wide{
+    overflow: auto;
+  }
+
+  .card.intervention-card {
+    float: none;
+    width: 100%;
+}
+
+  .card.redflag-card {
+    float: none; 
+    width: 100%;
+  }
+
+  .cards{
+    min-height: 200px;
+  }
+
+  .card{
+    height: 150px;
+  }
+
 }

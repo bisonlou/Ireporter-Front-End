@@ -755,6 +755,10 @@ function update_dashboard(data) {
 
   if (sessionStorage.getItem('is_admin') == 'true') {
     get_element('total-redflags').innerHTML = node['total_red-flag']['count'];
+    get_element('pending-redflags').innerHTML = pending_redflags;
+    get_element('pending-interventions').innerHTML = pending_interventions;
+    get_element('rejected-redflags').innerHTML = rejected_redflags;
+    get_element('rejected-interventions').innerHTML = rejected_interventions;
     get_element('total-interventions').innerHTML = node['total_intervention']['count'];
     get_element('resolved-redflags').innerHTML = node['resolved_red-flag']['count'];
     get_element('investigation-redflags').innerHTML = node['investigation_red-flag']['count'];

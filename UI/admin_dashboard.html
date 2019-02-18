@@ -20,6 +20,19 @@
 </head>
 
 <body onload="denyAccess('non-admin'); getDashboardTotals(); displayUserName();">
+    <div class="nav-bar">
+        <header>
+            <div id="branding">
+                <h1><span class="highlight">i</span>&nbsp;Reporter</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="account-name"></a></li>
+                    <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
     <div class="sidenav">
         <a href="#" onclick="navigate_to('admin_dashboard.html')">Dashboard</a>
         <hr class="gradient">
@@ -29,20 +42,7 @@
         <hr class="gradient">
     </div>
 
-    <div class="main">
-        <div class="nav-bar">
-            <header>
-                <div id="branding">
-                    <h1><span class="highlight">i</span>&nbsp;Reporter</h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#" id="account-name"></a></li>
-                        <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </div>
+    <div class="main">        
         <div class="container">
             <svg width="1000" height="200">
                 <circle cx="80" cy="100" r="70" fill="none" stroke="teal" stroke-width="1" />
