@@ -135,9 +135,13 @@ function register() {
     .then(response => {
       return response.json();
     }).then(data => {
+      if (data['status'] == 401) {
+        navigate_to('login.html')
+      }
       if (data['status'] == 201) {
-        set_cookie(data);
         loader.style.display = 'none';
+        set_session(data)
+        set_cookie(data);        
         navigate_to("home.html");
       }
       else {
@@ -174,14 +178,17 @@ function login() {
     .then(response => {
       return response.json();
     }).then(data => {
+      if (data['status'] == 401) {
+        navigate_to('login.html')
+      }
       if (data['status'] == 200) {
+        set_session(data)
         set_cookie(data);
-        if (data['data'][0]['user']['isadmin'] == true) {
+        if (sessionStorage.getItem('is_admin') == "true") {
           navigate_to("admin_dashboard.html");
         } else {
           navigate_to("home.html");
         }
-        loader.style.display = 'block';
       }
       else {
         display_errors(data);
@@ -203,23 +210,8 @@ function getIndexData() {
 }
 
 
-function displayUserName() {
-  const url = 'https://bisonlou.herokuapp.com/api/v1/auth/user';
-  // const url = 'http://127.0.0.1:5000/api/v1/auth/users';
-  
-  fetch(url, {
-    headers: get_headers()
-  })
-
-    .then(response => {
-      return response.json();
-    }).then(data => {
-      account_name = get_element('account-name');
-      account_name.innerHTML = data['data'][0]['username'];
-    }).catch(err => {
-      console.log(err);
-    });
-    
+function displayUserName() { 
+  get_element('account-name').innerHTML = sessionStorage.getItem('user_name');    
 }
 
 function getIncidents() {
@@ -239,8 +231,8 @@ function getRedflags(user_type) {
     .then(response => {
       return response.json();
     }).then(data => {
-
       if (data['status'] == 401) {
+        delete_session();
         loader.style.display = 'none';
         navigate_to('login.html');
       }
@@ -293,7 +285,6 @@ function getDashboardTotals() {
     .then(response => {
       return response.json();
     }).then(data => {
-
       if (data['status'] == 401) {
         navigate_to('login.html');
       } else {
@@ -320,6 +311,9 @@ function getUsers() {
     .then(response => {
       return response.json();
     }).then(data => {
+      if (data['status'] == 401) {
+        navigate_to('login.html')
+      }
       populate_users_table(data);
       loader.style.display = 'none';
     }).catch(err => {
@@ -351,6 +345,9 @@ function postIncident(incidentType) {
   }).then(response => {
     return response.json();
   }).then(data => {
+    if (data['status'] == 401) {
+      navigate_to('login.html')
+    }
     if (data['status'] == 201) {
       var incident_id = data['data'][0]['id'];
 
@@ -393,17 +390,20 @@ function displayImages(files) {
 
   for (i; i < numFiles; i++) {
     const file = files[i];
-
     var row = table.insertRow(i);
-
     var name_cell = row.insertCell(0);
     var delete_cell = row.insertCell(1);
 
     file_name = file.name;
     name_cell.innerHTML = file_name;
-    delete_cell.innerHTML = '<a href="#">Delete</a>';
+    on_click = "clearImage("+ i +")"
+    delete_cell.innerHTML = '<a href="#" onClick="' + on_click + '">Delete</a>';
 
   }
+}
+
+function clearImage(row_id){
+  get_element("images-table").deleteRow(row_id);
 }
 
 
@@ -417,7 +417,7 @@ function putIncident() {
   url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id;
   // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id;
 
-  let body = JSON.stringify({
+  body = JSON.stringify({
     'title': get_element_value('title'),
     'comment': get_element_value('comment'),
     'latitude': lat,
@@ -447,8 +447,8 @@ function putIncident() {
             file = image_collection[0];
 
             form_data.append("image", file, file.name);
-            url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
-            // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
+            // url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
+            url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
 
             return fetch(url, {
               method: 'PATCH',
@@ -471,17 +471,14 @@ function putIncident() {
 }
 
 function getIncident() {
-  loader.style.display = 'block';
+  loader.style.display = 'block';  
+  
   let current_url = window.location.href;
   let incidentId = /id=([^&]+)/.exec(current_url)[1];
-  incidentId = parseInt(incidentId, 10)
-
-  let title = get_element('title');
-  let comment = get_element('comment');
+  // incidentId = parseInt(incidentId, 10)
 
   var url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incidentId;
-  // var url ='http://127.0.0.1:5000/api/v1/incident/' + incidentId;
-
+  // var url ='http://127.0.0.1:5000/api/v1/incidents/' + incidentId;
 
   fetch(url, {
     method: 'get',
@@ -491,8 +488,31 @@ function getIncident() {
     .then(response => {
       return response.json();
     }).then(data => {
-      title.value = data['data'][0]['title'];
-      comment.innerHTML = data['data'][0]['comment'];
+      if (data['status'] == 401) {
+        navigate_to('login.html')
+      }
+      if (sessionStorage.getItem('is_admin') == 'false'){
+        if (data['data'][0]['status'] != 'pending'){
+          get_element('btn-submit').style.disabled = 'disabled';
+          get_element('image').style.disabled = 'disabled';
+          get_element('title').style.disabled = 'disabled';
+          get_element('comment').style.disabled = 'disabled';
+        }
+        title = get_element('title');
+        comment = get_element('comment');
+
+        title.value = data['data'][0]['title'];
+        comment.innerHTML = data['data'][0]['comment'];
+      }else{
+        title = get_element('admin-title');
+        comment = get_element('admin-comment');
+
+        title.innerHTML = data['data'][0]['title'];
+        comment.innerHTML = data['data'][0]['comment'];
+
+        displayStatus(data['data'][0]['status'])
+      }      
+      
       lng = data['data'][0]['longitude'];
       lat = data['data'][0]['latitude']
 
@@ -515,12 +535,13 @@ function getIncident() {
 
 function deleteIncident() {
   let current_url = window.location.href;
-  let incidentId = /id=([^&]+)/.exec(current_url)[1];
+  let incident_id = /id=([^&]+)/.exec(current_url)[1];
   // incidentId = parseInt(incidentId, 10)
   loader.style.display = 'block';
 
-  url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incidentId;
-  // url = url = 'http://127.0.0.1:5000/api/v1/incidents/' + incidentId;
+  url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id ;
+  // url = url = 'http://127.0.0.1:5000/api/v1/incidents/' + incident_id ;
+
 
   fetch(url, {
     method: 'delete',
@@ -530,18 +551,65 @@ function deleteIncident() {
     .then(response => {
       return response.json();
     }).then(data => {
+      if (data['status'] == 401) {
+        navigate_to('login.html')
+      }
       if (data['status'] == 200) {
-        loader.style.display = 'none';
         navigate_to('home.html');
       }
     }).catch(err => {
+      loader.style.display = 'none';
       console.log(err);
     });
 
 }
 
+
+function saveStatus(status){
+  displayStatus(status);
+
+  current_url = window.location.href;
+  incident_id = /id=([^&]+)/.exec(current_url)[1];
+  // incidentId = parseInt(incidentId, 10)
+
+  url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/status';
+  // url = url = 'http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/status';
+
+  body = JSON.stringify({
+    'title': 'dummy',
+    'comment': 'dummy',
+    'latitude': 0.0,
+    'longitude': 0.0,
+    'type': 'intervention',
+    'status': status
+  })
+
+  loader.style.display = 'block';
+  fetch(url, {
+    method: 'PATCH',
+    body: body,
+    headers: get_headers()
+  })
+
+    .then(response => {
+      return response.json();
+    }).then(data => {
+      if (data['status'] == 401) {
+        loader.style.display = 'none';
+        navigate_to('login.html')
+      }
+      if (data['status'] == 200) {
+        loader.style.display = 'none';
+        navigate_to('admin_dashboard.html');
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+}
+
 function logout() {
   delete_cookie()
+  delete_session()
   navigate_to('login.html')
 }
 
@@ -560,8 +628,17 @@ function set_cookie(data) {
 }
 
 
-function delete_cookie(data) {
+function set_session(data) {
+  sessionStorage.setItem('user_name', data['data'][0]['user']['username'] );
+  sessionStorage.setItem('is_admin', data['data'][0]['user']['isadmin'] );
+}
+
+function delete_cookie() {
   document.cookie = "token=";
+}
+
+function delete_session() {
+  sessionStorage.clear();
 }
 
 
@@ -600,6 +677,40 @@ function display_errors(data) {
   }
 }
 
+function openModal(file_name) {
+  url = "https://bisonlou.herokuapp.com/api/v1/incidents/images/" + file_name;
+  fetch(url, {
+    method: 'GET',
+    headers: get_headers()
+  })
+
+    .then(response => {
+      return response.arrayBuffer();
+    }).then(buffer => {
+      var base64Flag = 'data:image/jpeg;base64,';
+      var imageStr = arrayBufferToBase64(buffer);
+      get_element('modal-image').src = base64Flag + imageStr;
+      document.getElementById('myModal').style.display = "block";
+    }).catch(err => {
+      console.log(err);
+    });
+
+}
+
+function arrayBufferToBase64(buffer) {
+  var binary = '';
+  var bytes = [].slice.call(new Uint8Array(buffer));
+
+  bytes.forEach((b) => binary += String.fromCharCode(b));
+
+  return window.btoa(binary);
+};
+
+// Close the Modal
+function closeModal() {
+  document.getElementById('myModal').style.display = "none";
+}
+
 
 function displayAlert() {
   alert = get_element('alert-box');
@@ -619,10 +730,11 @@ function populate_images_table(data, table) {
 
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
+    file_name = data['data'][0]['images'][i];
 
-    cell1.innerHTML = data['data'][0]['images'][i];
-    cell2.innerHTML = '<a href="#">Delete</a>';
-
+    cell1.innerHTML = file_name;
+    on_click = "openModal('" + file_name + "');"
+    cell2.innerHTML = '<a href="#" onClick="' + on_click + '">View</a>';  
   }
 }
 
@@ -658,12 +770,19 @@ function populate_incident_table(data, table, type, user_type) {
     cell2.innerHTML = data['data'][0][i]['title'];
     cell3.innerHTML = data['data'][0][i]['status'];
 
+    status = data['data'][0][i]['status']
+
     if (user_type == 'admin') {
       cell4.innerHTML = '<a href="./admin_view_incident.html?id=' + incident_id + '">View</a>';
     } else {
-      cell4.innerHTML = '<a href="./incident_edit.html?type=' + type + '&id=' + incident_id +
+      if (status == 'pending'){
+        cell4.innerHTML = '<a href="./incident_edit.html?type=' + type + '&id=' + incident_id +
         '">Edit</a> | <a href="./incident_confirm_delete.html?type=' + type + '&id=' + incident_id +
         '">Delete</a>';
+      }else{
+        cell4.innerHTML = '<a href="#" style="disabled:true; color:grey;">Edit </a> | <a href="#" style="disabled:true; color:grey;" >Delete</a>';
+      
+      }
     }
 
   }
@@ -706,7 +825,7 @@ function update_dashboard(data) {
   get_element('rejected-interventions').innerHTML = node['rejected_intervention']['count'];
 
 
-  if (get_element('total-users') != 'undefined') {
+  if (sessionStorage.getItem('is_admin') == 'true') {
     get_element('resolved-redflags').innerHTML = node['resolved_red-flag']['count'];
     get_element('investigation-redflags').innerHTML = node['investigation_red-flag']['count'];
     get_element('resolved-interventions').innerHTML = node['resolved_intervention']['count'];
@@ -716,6 +835,25 @@ function update_dashboard(data) {
     get_element('total-non-admins').innerHTML = node['non_admin_count']['count'];
   }
 
+}
+
+function displayStatus(status){
+  ground = "";
+  newColor = "white";
+  if (status == 'pending'){
+    ground = 'teal';
+  }else if (status == 'investigating'){
+    ground = 'purple';
+  }else if (status == 'resolved'){
+    ground = 'green';
+  }else if (status == 'rejected'){
+    ground = 'crimson';
+  }
+
+    status_circle = get_element(status);
+    status_circle.style.backgroundColor = ground;
+    status_circle.style.color = newColor;
+  
 }
 
 function validateIncident() {

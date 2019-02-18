@@ -10,11 +10,11 @@
     <!--  CSS -->
     <link href="./css/style.css" rel="stylesheet">
     <!-- Favicons -->
-    <link rel="icon" href="" sizes="32x32" type="image/png">
+    <link rel="icon" href="./images/megaphone.png" sizes="32x32" type="image/png">
 
 </head>
 
-<body onload="getIncidents()">
+<body onload="getIncidents(); displayUserName();">
     <div class="sidenav">
         <a href="#" onclick="navigate_to('admin_dashboard.html')">Dashboard</a>
         <hr class="gradient">
@@ -32,7 +32,7 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#" id="account-name">Admin</a></li>
+                        <li><a href="#" id="account-name"></a></li>
                         <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
                     </ul>
                 </nav>
