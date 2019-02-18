@@ -56,6 +56,14 @@ body {
     overflow: hidden;
 }
 
+.container-wide{
+    width:100%;
+    margin:auto;
+    margin-top:5px;
+    overflow: hidden;
+    background-color: #e5f2f7;
+}
+
 #map {
     height: 200px;  
     width: 100%; 
@@ -170,6 +178,14 @@ a {
     text-decoration: none;
     font-size: 12px;
     line-height: 20px;
+}
+
+a:hover{
+    color: #fff;
+}
+
+table a:hover{
+    color: teal;
 }
 
 
@@ -626,8 +642,7 @@ table th {
 .cards {
     box-sizing: border-box;      
     margin-top:5px; 
-    padding: 20px;   
-    min-height: 220px;
+    min-height: 230px;
     width: 100%;
     overflow: hidden;
 }
@@ -635,18 +650,16 @@ table th {
 .card{
     width:40%;
     height: 200px;
-    color:#ffffff;
     border-radius: 4px;
 }
 
 .card.redflag-card {
     float: left;
-    background-color:rgb(228, 58, 58); 
 }
 
 .card.intervention-card{
   float: right;
-  background-color:lightseagreen;
+  margin-right: 60px;
   
 }
 
@@ -690,17 +703,15 @@ border-spacing: 0px;
   }
 
 .button-add{
+    margin-top: -3px;
     float: right;
     height: 37px; 
-    width: 37px;   
-    margin-right:8px;        
+    width: 37px;       
     background: url('../images/plus.png');
     border:none;
     overflow: hidden;
     background-size: cover;
     background-position: center;
-    border-radius: 20px;
-    box-shadow: 2px 2px 2px #5b7f8d;
 }
 
 /* Red flag */

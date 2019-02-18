@@ -737,7 +737,7 @@ function populate_images_table(data, table) {
 
     cell1.innerHTML = file_name;
     on_click = "openModal('" + file_name + "');"
-    cell2.innerHTML = '<a href="#" onClick="' + on_click + '">View</a>';  
+    cell2.innerHTML = '<a  href="#" onClick="' + on_click + '">View</a>';  
   }
 }
 
@@ -818,17 +818,44 @@ function populate_users_table(data) {
 
 function update_dashboard(data) {
   node = data['data']
+  total_redflags = node['total_red-flag']['count'];
+  total_interventions = node['total_intervention']['count'];
 
-  get_element('total-redflags').innerHTML = node['total_red-flag']['count'];
-  get_element('pending-redflags').innerHTML = node['pending_red-flag']['count'];
-  get_element('rejected-redflags').innerHTML = node['rejected_red-flag']['count'];
+  pending_redflags = node['pending_red-flag']['count'];
+  investigation_redflags = node['investigation_red-flag']['count'];
+  rejected_redflags = node['rejected_red-flag']['count'];
+  resolved_redflags = node['resolved_red-flag']['count'];
 
-  get_element('total-interventions').innerHTML = node['total_intervention']['count'];
-  get_element('pending-interventions').innerHTML = node['pending_intervention']['count'];
-  get_element('rejected-interventions').innerHTML = node['rejected_intervention']['count'];
+  pending_interventions = node['pending_intervention']['count'];
+  investigation_interventions = node['investigation_intervention']['count'];
+  rejected_interventions = node['rejected_intervention']['count'];
+  resolved_interventions = node['resolved_intervention']['count'];
+
+  perc_pending_redflag = (pending_redflags/total_redflags)*100;
+  perc_investigating_redflag = (investigation_redflags/total_redflags)*100;
+  perc_resolved_redflag = (resolved_redflags/total_redflags)*100;
+  perc_rejected_redflag = (rejected_redflags/total_redflags)*100;
+
+  perc_pending_intervention = (pending_interventions/total_interventions)*100;
+  perc_investigating_intervention = (investigation_interventions/total_interventions)*100;
+  perc_resolved_intervention = (resolved_interventions/total_interventions)*100;
+  perc_rejected_intervention = (rejected_interventions/total_interventions)*100;
+  
+  get_element('pending-redflags').style.height = perc_pending_redflag + '%';
+  get_element('investigation-redflags').style.height = perc_investigating_redflag + '%';
+  get_element('resolved-redflags').style.height = perc_resolved_redflag + '%';
+  get_element('rejected-redflags').style.height = perc_rejected_redflag + '%';
+
+  get_element('pending-interventions').style.height = perc_pending_intervention + '%';
+  get_element('investigation-interventions').style.height = perc_investigating_intervention + '%';
+  get_element('resolved-interventions').style.height = perc_resolved_intervention + '%';
+  get_element('rejected-interventions').style.height = perc_rejected_intervention + '%';
+
 
 
   if (sessionStorage.getItem('is_admin') == 'true') {
+    get_element('total-redflags').innerHTML = node['total_red-flag']['count'];
+    get_element('total-interventions').innerHTML = node['total_intervention']['count'];
     get_element('resolved-redflags').innerHTML = node['resolved_red-flag']['count'];
     get_element('investigation-redflags').innerHTML = node['investigation_red-flag']['count'];
     get_element('resolved-interventions').innerHTML = node['resolved_intervention']['count'];

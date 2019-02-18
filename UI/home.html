@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <!--  CSS -->
     <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/graph.css" rel="stylesheet">
     <script src="./js/scripts.js" type="text/javascript"></script>
     <script type="text/javascript" src="./js/secure_url.js"></script>
     <!-- Favicons -->
@@ -33,80 +34,48 @@
             </nav>
         </header>
     </div>
-    <div class="container">
+    <div class="container-wide">
         <div class="cards">
             <div class="card redflag-card">
-                <div>
-                    <table class="flag-table">
-                        <tr>
-                            <td>
-                                <label class="card-label">Total red flags</label>
-                            </td>
-                            <td>
-                                <label class="card-value" id="total-redflags"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="card-label">Pending red flags</label>
-                            </td>
-                            <td>
-                                <label class="card-value" id="pending-redflags"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="card-label">Rejected red flags</label>
-                            </td>
-                            <td>
-                                <label class="card-value" id="rejected-redflags"></label>
-                            </td>
-                        </tr>
-                    </table>
-                    <button type="submit" class="button-add" onclick="navigate_to('redflag_add.html')"></button>
-                </div>
+                <ul class="chart">
+                    <li>
+                        <span class="redflag"  id="pending-redflags" title="Pending"></span>
+                    </li>
+                    <li>
+                        <span class="redflag"  id="investigation-redflags" title="Investigating"></span>
+                    </li>
+                    <li>
+                        <span class="redflag"  id="resolved-redflags" title="Resolved"></span>
+                    </li>
+                    <li>
+                        <span class="redflag"  id="rejected-redflags" title="Rejected"></span>
+                    </li>
+                </ul>
+                
             </div>
 
             <div class="card intervention-card">
-                <table class="flag-table">
-                    <tr>
-                        <td>
-                            <label class="card-label">Total interventions</label>
-                        </td>
-                        <td>
-                            <label class="card-value" id="total-interventions"></label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="card-label">Pending interventions</label>
-                        </td>
-                        <td>
-                            <label class="card-value" id="pending-interventions"></label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="card-label">Rejected interventios</label>
-                        </td>
-                        <td>
-                            <label class="card-value" id="rejected-interventions"></label>
-                        </td>
-                    </tr>
-                </table>
-                <div>
-                    <form action="./intervention_add.html">
-                        <button type="submit" class="button-add"></button>
-                    </form>
-                </div>
+                <ul class="chart">
+                    <li>
+                        <span class="intervention" id="pending-interventions" title="Pending"></span>
+                    </li>
+                    <li>
+                        <span class="intervention" id="investigation-interventions" title="Investigating"></span>
+                    </li>
+                    <li>
+                        <span class="intervention" id="resolved-interventions" title="Resolved"></span>
+                    </li>
+                    <li>
+                        <span class="intervention" id="rejected-interventions" title="Rejected"></span>
+                    </li>
+                </ul>                
             </div>
         </div>
-    </div>
     </div>
     <div class="container">
         <div class="tables">
             <div class="redflag-table">
-                <label class="table-header red">My red flags</label>
+                <label class="table-header red">My red flags <button type="submit" class="button-add" onclick="navigate_to('redflag_add.html')"></button></label>
                 <table id="redflag-table">
                     <thead>
                         <tr>
@@ -122,7 +91,7 @@
                 </table>
             </div>
             <div class="intervention-table">
-                <label class="table-header intervention">My interventions</label>
+                <label class="table-header intervention">My interventions <button type="submit" class="button-add" onclick="navigate_to('intervention_add.html')"></button></label>
                 <table id="intervention-table">
                     <thead>
                         <tr>
