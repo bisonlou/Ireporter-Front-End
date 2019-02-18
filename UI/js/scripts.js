@@ -447,8 +447,8 @@ function putIncident() {
             file = image_collection[0];
 
             form_data.append("image", file, file.name);
-            // url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
-            url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
+            url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
+            // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
 
             return fetch(url, {
               method: 'PATCH',
