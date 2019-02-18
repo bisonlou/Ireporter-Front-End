@@ -10,6 +10,7 @@
     <!--  CSS -->
     <link href="./css/style.css" rel="stylesheet">
     <script src="./js/scripts.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./js/secure_url.js"></script>
     <!-- Favicons -->
     <link rel="icon" href="./images/megaphone.png" sizes="32x32" type="image/png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
@@ -18,7 +19,7 @@
 
 </head>
 
-<body onload="getIndexData();">
+<body onload="denyAccess('admin'); getIndexData();">
     <div class="nav-bar">
         <header>
             <div id="branding">

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+<head >
     <meta name="description" content="Hold your leaders accountable.">
     <meta name="author" content="Innocent Lou">
 
@@ -15,9 +15,11 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet">
 
+    <script type="text/javascript" src="./js/secure_url.js"></script>
+
 </head>
 
-<body onload="getDashboardTotals(); displayUserName();">
+<body onload="denyAccess('non-admin'); getDashboardTotals(); displayUserName();">
     <div class="sidenav">
         <a href="#" onclick="navigate_to('admin_dashboard.html')">Dashboard</a>
         <hr class="gradient">

@@ -491,12 +491,12 @@ function getIncident() {
       if (data['status'] == 401) {
         navigate_to('login.html')
       }
+      if(data['status'] == 403){
+        navigate_to('403.html')
+      }
       if (sessionStorage.getItem('is_admin') == 'false'){
         if (data['data'][0]['status'] != 'pending'){
-          get_element('btn-submit').style.disabled = 'disabled';
-          get_element('image').style.disabled = 'disabled';
-          get_element('title').style.disabled = 'disabled';
-          get_element('comment').style.disabled = 'disabled';
+          navigate_to('403.html')
         }
         title = get_element('title');
         comment = get_element('comment');
@@ -553,6 +553,9 @@ function deleteIncident() {
     }).then(data => {
       if (data['status'] == 401) {
         navigate_to('login.html')
+      }
+      if(data['status'] == 403){
+        navigate_to('403.html')
       }
       if (data['status'] == 200) {
         navigate_to('home.html');
