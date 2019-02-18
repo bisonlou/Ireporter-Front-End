@@ -16,24 +16,24 @@
 </head>
 
 <body onload="getIncident()">
-        <div class="nav-bar">
-                <header>
-                    <div id="branding">
-                        <h1><span class="highlight">i</span>&nbsp;Reporter</h1>
-                    </div>
-                    <nav>
-                        <ul>
-                            <li class="current"><a href="./home.html">Home</a></li>
-                            <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
-                        </ul>
-                    </nav>
-                </header>
+    <div class="nav-bar">
+        <header>
+            <div id="branding">
+                <h1><span class="highlight">i</span>&nbsp;Reporter</h1>
             </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="./home.html">Home</a></li>
+                    <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
     <div class="container">
-            <div class="alert-box" id="alert-box">
-                    <p>Incident edited succesfully</p>
-                </div>
-                <div class="error-box" id="error-box"></div>
+        <div class="alert-box" id="alert-box">
+            <p>Incident edited succesfully</p>
+        </div>
+        <div class="error-box" id="error-box"></div>
         <div class="flag-box">
             <div class="left">
                 <input type="text" placeholder="Title" id="title">
@@ -45,7 +45,7 @@
                 <p>Image evidence</p>
                 <input type="file" id="image" multiple onchange="displayImages(this.files); return false;" />
                 <div class="media-table">
-                    <table id="images_table">
+                    <table id="images-table">
                     </table>
                 </div>
 
@@ -59,15 +59,22 @@
             </div>
         </div>
         <div class="flag-box-submit">
-            <input type="submit" onclick="putIncident()" value="Submit Changes">
+            <input type="submit" id="btn-submit" onclick="putIncident(boy)" value="Submit Changes">
         </div>
     </div>
 
     </div>
-
+    <div id="loader"></div>
+    <div id="myModal" class="modal">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+                <img id="modal-image" src="">
+        </div>
+    </div>
 </body>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 <!--map box-->
 <script src="./js/scripts.js" type="text/javascript"></script>
+
 </html>

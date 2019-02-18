@@ -42,23 +42,30 @@
             </div>
             <div class="right">
                 <p>Image evidence</p>
-                <input type="file" id="image" multiple onchange="displayImages(this.files); return false;" />
+                <input type="file" id="image" onchange="displayImages(this.files); return false;" />
                 <div class="media-table">
-                    <table id="images_table">
+                    <table id="images-table">
                     </table>
                 </div>
 
                 <p>Video evidence</p>
                 <input type="file" disabled>
                 <div class="media-table">
-                    <table id="images_table">
+                    <table id="videos-table">
 
                     </table>
                 </div>
             </div>
         </div>
         <div class="flag-box-submit">
-            <input type="submit" onclick="postIncident('intervention');" value="Submit">
+            <input type="submit" onclick="postIncident('intervention'); return false;" value="Submit">
+        </div>
+        <div id="loader"></div>
+        <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+                    <img id="modal-image" src="">
+            </div>
         </div>
 </body>
 <!--  JAVASCRIPT -->

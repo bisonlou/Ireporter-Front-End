@@ -10,14 +10,14 @@
     <!--  CSS -->
     <link href="./css/style.css" rel="stylesheet">
     <!-- Favicons -->
-    <link rel="icon" href="" sizes="32x32" type="image/png">
+    <link rel="icon" href="./images/megaphone.png" sizes="32x32" type="image/png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet">
 
 </head>
 
-<body onload="getDashboardTotals()">
+<body onload="getDashboardTotals(); displayUserName();">
     <div class="sidenav">
         <a href="#" onclick="navigate_to('admin_dashboard.html')">Dashboard</a>
         <hr class="gradient">
@@ -35,7 +35,7 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#" id="account-name">Admin</a></li>
+                        <li><a href="#" id="account-name"></a></li>
                         <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
                     </ul>
                 </nav>
@@ -56,11 +56,11 @@
                 <text x="390" y="140" fill="slategray" font-size="14px" dy=".3em">Pending</text>
 
                 <circle cx="590" cy="100" r="70" fill="none" stroke="purple" stroke-width="1" />
-                <text x="590" y="100" id="rejected-redflags" text-anchor="middle" fill="purple" font-size="50px" dy=".3em"></text>
-                <text x="560" y="140" fill="slategray" font-size="14px" dy=".3em">Rejected</text>
+                <text x="590" y="100" id="investigation-redflags" text-anchor="middle" fill="purple" font-size="50px" dy=".3em"></text>
+                <text x="550" y="140" fill="slategray" font-size="14px" dy=".3em">Investigating</text>
 
                 <circle cx="760" cy="100" r="70" fill="none" stroke="crimson" stroke-width="1" />
-                <text x="760" y="100" id="investigation-redflags" text-anchor="middle" fill="crimson" font-size="50px" dy=".3em"></text>
+                <text x="760" y="100" id="rejected-redflags" text-anchor="middle" fill="crimson" font-size="50px" dy=".3em"></text>
                 <text x="730" y="140" fill="slategray" font-size="14px" dy=".3em">Rejected</text>
             </svg>
             <hr class="gradient">
@@ -78,11 +78,11 @@
                 <text x="390" y="140" fill="slategray" font-size="14px" dy=".3em">Pending</text>
 
                 <circle cx="590" cy="100" r="70" fill="none" stroke="purple" stroke-width="1" />
-                <text x="590" y="100" id="rejected-interventions" text-anchor="middle" fill="purple" font-size="50px" dy=".3em"></text>
-                <text x="560" y="140" fill="slategray" font-size="14px" dy=".3em">Rejected</text>
+                <text x="590" y="100" id="investigation-interventions" text-anchor="middle" fill="purple" font-size="50px" dy=".3em"></text>
+                <text x="550" y="140" fill="slategray" font-size="14px" dy=".3em">Investigating</text>
 
                 <circle cx="760" cy="100" r="70" fill="none" stroke="crimson" stroke-width="1" />
-                <text x="760" y="100" id="investigation-interventions" text-anchor="middle" fill="crimson" font-size="50px"  dy=".3em"></text>
+                <text x="760" y="100" id="rejected-interventions" text-anchor="middle" fill="crimson" font-size="50px"  dy=".3em"></text>
                 <text x="730" y="140" fill="slategray" font-size="14px" dy=".3em">Rejected</text>
             </svg>
             <hr class="gradient">
@@ -101,7 +101,7 @@
             </svg>
         </div>
     </div>
-
+    <div id="loader"></div>
 </body>
 <!--  JAVASCRIPT -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
