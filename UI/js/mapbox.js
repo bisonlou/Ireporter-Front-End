@@ -1,3 +1,6 @@
+lat = 0.3476;
+lng = 32.5825;
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmlzb25sb3UiLCJhIjoiY2pzMWVhNTZpMW5hZTN5bzV2cmxiZjdwYyJ9.6c7qPz7pGzqn0ntIyXkZXw';
 
 var map = new mapboxgl.Map({
