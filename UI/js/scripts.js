@@ -8,10 +8,12 @@ function register() {
   required_fields = ['username', 'email', 'firstname', 'lastname', 'phonenumber', 'password'];
 
   if (validate_required(required_fields) > 0) {
+    loader.style.display = 'none';
     return
   }
 
   if (validate_passwords_match() == false) {
+    loader.style.display = 'none';    
     return
   }
 
@@ -58,6 +60,7 @@ function login() {
 
   required_fields = ['email', 'password'];
   if (validate_required(required_fields) > 0) {
+    loader.style.display = 'none';
     return
   }
   loader = get_element('loader');
