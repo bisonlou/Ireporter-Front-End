@@ -81,9 +81,9 @@ function login() {
     .then(response => {
       return response.json();
     }).then(data => {
-      if (data['status'] == 401) {
-        navigate_to('login.html')
-      }
+//       if (data['status'] == 401) {
+//         navigate_to('login.html')
+//       }
       if (data['status'] == 200) {
         set_session(data)
         set_cookie(data);
