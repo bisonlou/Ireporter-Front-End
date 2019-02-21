@@ -12,9 +12,24 @@
     <!-- Favicons -->
     <link rel="icon" href="./images/megaphone.png" sizes="32x32" type="image/png">
 
+    <script type="text/javascript" src="./js/secure_url.js"></script>
+
 </head>
 
-<body onload="getUsers(); displayUserName();">
+<body onload="denyAccess('non-admin'); getUsers(); displayUserName();">
+    <div class="nav-bar">
+        <header>
+            <div id="branding">
+                <h1><span class="highlight">i</span>&nbsp;Reporter</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="account-name"></a></li>
+                    <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
     <div class="sidenav">
         <a href="#" onclick="navigate_to('admin_dashboard.html')">Dashboard</a>
         <hr class="gradient">
@@ -24,20 +39,7 @@
         <hr class="gradient">
     </div>
 
-    <div class="main">
-        <div class="nav-bar">
-            <header>
-                <div id="branding">
-                    <h1><span class="highlight">i</span>&nbsp;Reporter</h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#" id="account-name"></a></li>
-                        <li id="sign-out"><a href="#" onclick="logout();">sign out</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </div>
+    <div class="main">       
         <div class="container">
             <div class="tables">
                 <div class="redflag-table-wide">

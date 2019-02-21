@@ -1,0 +1,10 @@
+
+#map {
+    height: 230px;  
+    width: 100%; 
+   }
+
+#geocoder-container > div {
+    min-width:50%;
+    margin-left:25%;
+    }

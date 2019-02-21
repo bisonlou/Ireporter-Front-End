@@ -1,105 +1,5 @@
 var image_collection;
-var lat = 32.5825;
-var lng = 0.3476;
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmlzb25sb3UiLCJhIjoiY2pzMWVhNTZpMW5hZTN5bzV2cmxiZjdwYyJ9.6c7qPz7pGzqn0ntIyXkZXw';
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v9',
-  center: [32.5825, 0.3476],
-  zoom: 6
-});
-
-var canvas = map.getCanvasContainer();
-
-var geojson = {
-  "type": "FeatureCollection",
-  "features": [{
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [32.5825, 0.3476]
-    }
-  }]
-};
-
-
-function onMove(e) {
-  var coords = e.lngLat;
-
-  // Set a UI indicator for dragging.
-  canvas.style.cursor = 'grabbing';
-
-  // Update the Point feature in `geojson` coordinates
-  // and call setData to the source layer `point` on it.
-  geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
-  map.getSource('point').setData(geojson);
-}
-
-function onUp(e) {
-  var coords = e.lngLat;
-
-  // Print the coordinates of where the point had
-  // finished being dragged to on the map.
-  lng = coords.lng
-  lat = coords.lat;
-  canvas.style.cursor = '';
-
-  // Unbind mouse/touch events
-  map.off('mousemove', onMove);
-  map.off('touchmove', onMove);
-}
-
-map.on('load', function () {
-
-  // Add a single point to the map
-  map.addSource('point', {
-    "type": "geojson",
-    "data": geojson
-  });
-
-  map.addLayer({
-    "id": "point",
-    "type": "circle",
-    "source": "point",
-    "paint": {
-      "circle-radius": 10,
-      "circle-color": "#3887be"
-    }
-  });
-
-  // When the cursor enters a feature in the point layer, prepare for dragging.
-  map.on('mouseenter', 'point', function () {
-    map.setPaintProperty('point', 'circle-color', '#3bb2d0');
-    canvas.style.cursor = 'move';
-  });
-
-  map.on('mouseleave', 'point', function () {
-    map.setPaintProperty('point', 'circle-color', '#3887be');
-    canvas.style.cursor = '';
-  });
-
-  map.on('mousedown', 'point', function (e) {
-    // Prevent the default map drag behavior.
-    e.preventDefault();
-
-    canvas.style.cursor = 'grab';
-
-    map.on('mousemove', onMove);
-    map.once('mouseup', onUp);
-  });
-
-  map.on('touchstart', 'point', function (e) {
-    if (e.points.length !== 1) return;
-
-    // Prevent the default map drag behavior.
-    e.preventDefault();
-
-    map.on('touchmove', onMove);
-    map.once('touchend', onUp);
-  });
-});
 
 function register() {
   loader.style.display = 'block';
@@ -108,10 +8,12 @@ function register() {
   required_fields = ['username', 'email', 'firstname', 'lastname', 'phonenumber', 'password'];
 
   if (validate_required(required_fields) > 0) {
+    loader.style.display = 'none';
     return
   }
 
   if (validate_passwords_match() == false) {
+    loader.style.display = 'none';    
     return
   }
 
@@ -158,6 +60,7 @@ function login() {
 
   required_fields = ['email', 'password'];
   if (validate_required(required_fields) > 0) {
+    loader.style.display = 'none';
     return
   }
   loader = get_element('loader');
@@ -178,9 +81,9 @@ function login() {
     .then(response => {
       return response.json();
     }).then(data => {
-      if (data['status'] == 401) {
-        navigate_to('login.html')
-      }
+//       if (data['status'] == 401) {
+//         navigate_to('login.html')
+//       }
       if (data['status'] == 200) {
         set_session(data)
         set_cookie(data);
@@ -447,8 +350,8 @@ function putIncident() {
             file = image_collection[0];
 
             form_data.append("image", file, file.name);
-            // url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
-            url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
+            url = 'https://bisonlou.herokuapp.com/api/v1/incidents/' + incident_id + '/addImage';
+            // url ='http://127.0.0.1:5000/api/v1/incidents/' + incident_id + '/addImage';
 
             return fetch(url, {
               method: 'PATCH',
@@ -491,12 +394,12 @@ function getIncident() {
       if (data['status'] == 401) {
         navigate_to('login.html')
       }
+      if(data['status'] == 403){
+        navigate_to('403.html')
+      }
       if (sessionStorage.getItem('is_admin') == 'false'){
         if (data['data'][0]['status'] != 'pending'){
-          get_element('btn-submit').style.disabled = 'disabled';
-          get_element('image').style.disabled = 'disabled';
-          get_element('title').style.disabled = 'disabled';
-          get_element('comment').style.disabled = 'disabled';
+          navigate_to('403.html')
         }
         title = get_element('title');
         comment = get_element('comment');
@@ -553,6 +456,9 @@ function deleteIncident() {
     }).then(data => {
       if (data['status'] == 401) {
         navigate_to('login.html')
+      }
+      if(data['status'] == 403){
+        navigate_to('403.html')
       }
       if (data['status'] == 200) {
         navigate_to('home.html');
@@ -734,7 +640,7 @@ function populate_images_table(data, table) {
 
     cell1.innerHTML = file_name;
     on_click = "openModal('" + file_name + "');"
-    cell2.innerHTML = '<a href="#" onClick="' + on_click + '">View</a>';  
+    cell2.innerHTML = '<a  href="#" onClick="' + on_click + '">View</a>';  
   }
 }
 
@@ -815,17 +721,48 @@ function populate_users_table(data) {
 
 function update_dashboard(data) {
   node = data['data']
+  total_redflags = node['total_red-flag']['count'];
+  total_interventions = node['total_intervention']['count'];
 
-  get_element('total-redflags').innerHTML = node['total_red-flag']['count'];
-  get_element('pending-redflags').innerHTML = node['pending_red-flag']['count'];
-  get_element('rejected-redflags').innerHTML = node['rejected_red-flag']['count'];
+  pending_redflags = node['pending_red-flag']['count'];
+  investigation_redflags = node['investigation_red-flag']['count'];
+  rejected_redflags = node['rejected_red-flag']['count'];
+  resolved_redflags = node['resolved_red-flag']['count'];
 
-  get_element('total-interventions').innerHTML = node['total_intervention']['count'];
-  get_element('pending-interventions').innerHTML = node['pending_intervention']['count'];
-  get_element('rejected-interventions').innerHTML = node['rejected_intervention']['count'];
+  pending_interventions = node['pending_intervention']['count'];
+  investigation_interventions = node['investigation_intervention']['count'];
+  rejected_interventions = node['rejected_intervention']['count'];
+  resolved_interventions = node['resolved_intervention']['count'];
+
+  perc_pending_redflag = (pending_redflags/total_redflags)*100;
+  perc_investigating_redflag = (investigation_redflags/total_redflags)*100;
+  perc_resolved_redflag = (resolved_redflags/total_redflags)*100;
+  perc_rejected_redflag = (rejected_redflags/total_redflags)*100;
+
+  perc_pending_intervention = (pending_interventions/total_interventions)*100;
+  perc_investigating_intervention = (investigation_interventions/total_interventions)*100;
+  perc_resolved_intervention = (resolved_interventions/total_interventions)*100;
+  perc_rejected_intervention = (rejected_interventions/total_interventions)*100;
+  
+  get_element('pending-redflags').style.height = perc_pending_redflag + '%';
+  get_element('investigation-redflags').style.height = perc_investigating_redflag + '%';
+  get_element('resolved-redflags').style.height = perc_resolved_redflag + '%';
+  get_element('rejected-redflags').style.height = perc_rejected_redflag + '%';
+
+  get_element('pending-interventions').style.height = perc_pending_intervention + '%';
+  get_element('investigation-interventions').style.height = perc_investigating_intervention + '%';
+  get_element('resolved-interventions').style.height = perc_resolved_intervention + '%';
+  get_element('rejected-interventions').style.height = perc_rejected_intervention + '%';
+
 
 
   if (sessionStorage.getItem('is_admin') == 'true') {
+    get_element('total-redflags').innerHTML = node['total_red-flag']['count'];
+    get_element('pending-redflags').innerHTML = pending_redflags;
+    get_element('pending-interventions').innerHTML = pending_interventions;
+    get_element('rejected-redflags').innerHTML = rejected_redflags;
+    get_element('rejected-interventions').innerHTML = rejected_interventions;
+    get_element('total-interventions').innerHTML = node['total_intervention']['count'];
     get_element('resolved-redflags').innerHTML = node['resolved_red-flag']['count'];
     get_element('investigation-redflags').innerHTML = node['investigation_red-flag']['count'];
     get_element('resolved-interventions').innerHTML = node['resolved_intervention']['count'];
