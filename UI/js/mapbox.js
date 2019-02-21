@@ -53,6 +53,8 @@ function onUp(e) {
     // Unbind mouse/touch events
     map.off('mousemove', onMove);
     map.off('touchmove', onMove);
+
+    getPlaceName();
 }
 
 // After the map style has loaded on the page, add a source layer and default
@@ -78,6 +80,8 @@ map.on('load', function () {
     geocoder.on('result', function (ev) {
         map.getSource('point').setData(ev.result.geometry);
     });
+
+    getPlaceName();
 
     // When the cursor enters a feature in the point layer, prepare for dragging.
     map.on('mouseenter', 'point', function () {
@@ -110,3 +114,14 @@ map.on('load', function () {
         map.once('touchend', onUp);
     });
 });
+
+function getPlaceName() {
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + lng + "," + lat + ".json?access_token=pk.eyJ1IjoiYmlzb25sb3UiLCJhIjoiY2pzMWVhNTZpMW5hZTN5bzV2cmxiZjdwYyJ9.6c7qPz7pGzqn0ntIyXkZXw&limit=1";
+
+    fetch(url).then(response => {
+        return response.json();
+    }).then(data => {
+        place_name =  data['features'][0]['place_name'];
+        document.getElementById('location').value =  place_name;
+    });
+}

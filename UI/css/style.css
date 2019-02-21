@@ -711,7 +711,7 @@ border-spacing: 0px;
 
 .flag-box {
     margin:auto;
-    height: 430px;
+    height: 500px;
     width:100%;
     padding-top:40px;
     overflow: auto;
@@ -720,7 +720,7 @@ border-spacing: 0px;
 .flag-box .left{
     float: left;
     width:50%;
-    height:400px;
+    height:450px;
     padding:10px;
     background: #ffffff;
     box-shadow: 3px 3px 10px #5b7f8d;
@@ -730,7 +730,7 @@ border-spacing: 0px;
 .flag-box .right{
     float:right;
     width:40%;
-    height:400px;
+    height:450px;
     padding:10px;
     margin-right: 20px;
     background: #ffffff;
@@ -817,23 +817,6 @@ border-spacing: 0px;
         color: crimson;
         padding: 20px;
         text-align: center;
-    }
-
-    .filter{
-        padding: 10px;
-        margin:auto;
-        width: 50%;
-        height: 30px;        
-    }
-
-    .filter .user input{
-        width: 40%;
-        float: left;
-    }
-
-    .filter .district input{
-        width:40%;
-        float: right;
     }
  
 @media (max-width: 1024px){
